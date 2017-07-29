@@ -9,10 +9,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
 </head>
 <style>
-    body {
+    body:not(#playlist) {
         margin: 0;
         height: 100%;
         overflow: hidden
+    }
+    
+    #playlist {
+        overflow: auto;
+        max-height: 100vh;
     }
 </style>
 
@@ -28,9 +33,8 @@
                     </video>
                 </div>
                 <div class="col s1" style="background:#F1F1F1; height:100vh;"></div>
-                <div class="col s3">
+                <div class="col s3" id="playlist">
                 </div>
-
             </div>
         </div>
         <div class="col s2 " style="background:#F1F1F1; height:100vh; "></div>
