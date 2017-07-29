@@ -46,8 +46,10 @@
     <div class="row">
         <div class="col s2" style="height:100vh;">
             <ul id="slide-out" class="side-nav fixed">
-                <li><a href="#!">First Sidebar Link</a></li>
-                <li><a href="#!">Second Sidebar Link</a></li>
+                <li><a href="#!">Complete Playlist</a></li>
+                <li><a href="#!">Our Favorites</a></li>
+                <li><a href="#!">Trending</a></li>
+
             </ul>
             <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
 
@@ -55,14 +57,35 @@
         <div class="col s1" style="background:#F1F1F1; height:100vh;"></div>
         <div class="col s9" style="height:100vh;">
             <div class="row">
-                <div class="col s8">
+                <div class="col s8 ">
                     <div class="row"></div>
-                    <video class="responsive-video " controls>
+                    <video class="responsive-video" controls>
                         <source src="https://s3-us-west-2.amazonaws.com/addax/all/59c1f773-a27b-4cdc-b3a7-85f1a6fb1b75/video.mp4 " type="video/mp4 ">
                     </video>
                 </div>
-                <div class="col s1" style="background:#F1F1F1; height:100vh;"></div>
-                <div class="col s3" id="playlist">
+                <!--<div class="col s1" style="background:#F1F1F1; height:100vh;"></div>-->
+                <div class="col s4" id="playlist">
+                    <div class="row">
+
+                    </div>
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="switch"><label>By Rating<input type="checkbox" checked><span class="lever"></span>By Views</label></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <h3>Up Next...</h3>
+                    </div>
+                    <div class="row">
+                        <img class="responsive-img" src="cool_pic.jpg">
+                        <img class="responsive-img" src="cool_pic.jpg">
+                        <img class="responsive-img" src="cool_pic.jpg">
+                        <img class="responsive-img" src="cool_pic.jpg">
+                        <img class="responsive-img" src="cool_pic.jpg">
+                    </div>
+
                 </div>
             </div>
         </div>
