@@ -32,13 +32,23 @@
     }
 </style>
 <script>
+    var server_data = [];
+    //initial script to load everything up
     $.get("http://AddaxServer-env.ubepzwztwv.us-west-2.elasticbeanstalk.com/all", function(data) {
+
+        console.log("before")
         console.log(data)
-        console.log(data[0].url)
-            //setting main video
+        server_data = mergeSort(data);
+        loadVideos(server_data);
+    })
+
+
+
+    function loadVideos(data) {
         var elem = document.getElementById('suckMyDick')
         var source = document.createElement('source')
 
+        source.setAttribute('id', 'dick')
         source.setAttribute('src', data[0].url)
         elem.appendChild(source)
         elem.play()
@@ -73,10 +83,83 @@
             descriptionDiv.appendChild(score)
 
             rowDiv.appendChild(descriptionDiv)
+            console.log(data)
+            rowDiv.setAttribute('onClick', 'playVid(\"' + data[i].url.toString() + '\")')
+            rowDiv.setAttribute('id', 'thumbnail')
             playlist.appendChild(rowDiv)
         }
+    }
 
-    })
+    function playVid(url) {
+        console.log(url);
+        var elem = document.getElementById('suckMyDick')
+        elem.pause()
+        var source = document.getElementById('dick')
+        source.setAttribute('src', url)
+        elem.load()
+        elem.play()
+    }
+
+    function mergeSort(arr) {
+        if (arr.length < 2)
+            return arr;
+
+        var middle = parseInt(arr.length / 2);
+        var left = arr.slice(0, middle);
+        var right = arr.slice(middle, arr.length);
+
+        console.log(document.getElementById('checked').checked);
+        if (document.getElementById('checked').checked) {
+            console.log("calling score");
+            return mergeScore(mergeSort(left), mergeSort(right));
+        } else {
+            console.log("calling views");
+            return mergeViews(mergeSort(left), mergeSort(right));
+        }
+
+    }
+
+    function mergeScore(left, right) {
+        console.log("merge score called");
+        var result = [];
+
+        while (left.length && right.length) {
+            if (left[0].score >= right[0].score) {
+                result.push(left.shift());
+            } else {
+                result.push(right.shift());
+            }
+        }
+
+        while (left.length)
+            result.push(left.shift());
+
+        while (right.length)
+            result.push(right.shift());
+
+        return result;
+    }
+
+    function mergeViews(left, right) {
+        console.log("merge views called");
+        var result = [];
+
+        while (left.length && right.length) {
+            if (left[0].views >= right[0].views) {
+                result.push(left.shift());
+            } else {
+                result.push(right.shift());
+            }
+        }
+
+        while (left.length)
+            result.push(left.shift());
+
+        while (right.length)
+            result.push(right.shift());
+
+        return result;
+    }
 </script>
 
 
@@ -124,7 +207,7 @@
                 <div class="row">
                     <form class="col s12">
                         <div class="row">
-                            <div class="switch"><label>By Views<input type="checkbox" checked><span class="lever"></span>By Rating</label></div>
+                            <div class="switch"><label>By Views<input id="checked" type="checkbox" checked><span class="lever"></span>By Rating</label></div>
                         </div>
                     </form>
                 </div>
@@ -135,5 +218,23 @@
         </div>
     </div>
 </body>
+
+<script>
+    $(".switch").on("change", function() {
+        var playTab = document.getElementById("playlist")
+        $('#playlist').children('#thumbnail').remove();
+        server_data = mergeSort(server_data);
+        loadVideos(server_data);
+        var elem = document.getElementById('suckMyDick')
+        elem.pause()
+        var source = document.getElementById('dick')
+        source.setAttribute('src', server_data[0].url)
+        elem.load()
+
+        elem.play()
+        console.log("updated");
+        console.log(server_data);
+    });
+</script>
 
 </html>
