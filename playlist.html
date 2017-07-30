@@ -8,251 +8,131 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.3/lang/ca.min.js"></script>
 </head>
 
 <style>
-    body:not(#playlist) {
+    /* body:not(#playlist) {
         margin: 0;
         height: 100%;
         overflow: hidden
+    }*/
+    
+    body {
+        background: #F1F1F1
+    }
+    
+    #descriptionStyles {
+        color: #A3B3BF;
+        font-size: 10px
     }
     
     #playlist {
         overflow: auto;
         max-height: 100vh;
     }
-    
-    .btn-flat:hover {
-        background-color: #DEDEDE;
-        width: 100%
-    }
-    
-    header,
-    main,
-    footer {
-        padding-left: 300px;
-    }
-    
-    @media only screen and (max-width: 992px) {
-        header,
-        main,
-        footer {
-            padding-left: 0;
-        }
-    }
 </style>
 <script>
-    $('.button-collapse').sideNav('show');
-    // Hide sideNav
-    $('.button-collapse').sideNav('hide');
-    // Destroy sideNav
-    $('.button-collapse').sideNav('destroy');
+    $.get("http://AddaxServer-env.ubepzwztwv.us-west-2.elasticbeanstalk.com/all", function(data) {
+        console.log(data)
+        console.log(data[0].url)
+            //setting main video
+        var elem = document.getElementById('suckMyDick')
+        var source = document.createElement('source')
+
+        source.setAttribute('src', data[0].url)
+        elem.appendChild(source)
+        elem.play()
+
+        var mainDiv = document.getElementById('playlist')
+        for (i = 1; i < data.length; i++) {
+            var rowDiv = document.createElement('div')
+            rowDiv.setAttribute('class', 'row')
+
+            var imgDiv = document.createElement('div')
+            imgDiv.setAttribute('class', 'col s7')
+            var img = document.createElement('img')
+            img.setAttribute('class', 'responsive_img col s12')
+            img.setAttribute('src', 'cool_pic.jpg')
+
+            rowDiv.appendChild(imgDiv)
+            imgDiv.appendChild(img)
+
+            var descriptionDiv = document.createElement('div')
+            descriptionDiv.setAttribute('class', 'col s5')
+            var titleText = document.createElement('h6')
+            $(titleText).html(i)
+            var viewCount = document.createElement('h6')
+            viewCount.setAttribute("id", "descriptionStyles")
+            $(viewCount).html(data[i].views + "views")
+            var score = document.createElement('h6')
+            score.setAttribute("id", "descriptionStyles")
+            $(score).html(data[i].score + "/10")
+
+            descriptionDiv.appendChild(titleText)
+            descriptionDiv.appendChild(viewCount)
+            descriptionDiv.appendChild(score)
+
+            rowDiv.appendChild(descriptionDiv)
+            playlist.appendChild(rowDiv)
+        }
+
+    })
 </script>
 
 
 <body>
-    <div class="row">
-        <div class="col s2" style="height:100vh;">
-            <ul id="slide-out" class="side-nav fixed">
-                <li><a href="#!">Complete Playlist</a></li>
-                <li><a href="#!">Our Favorites</a></li>
-                <li><a href="#!">Trending</a></li>
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">Full Playlist</a></li>
+        <li><a href="#!">Our Favorites</a></li>
+        <li><a href="#!">Trending</a></li>
+    </ul>
+    <nav>
+        <div class="nav-wrapper">
+            <ul class="left hide-on-med-and-down">
+                <!-- Dropdown Trigger -->
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
-            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-
         </div>
-
-        <div class="col s1" style="background:#F1F1F1; height:100vh;"></div>
-        <div class="col s9" style="height:100vh;">
-            <div class="row">
-                <div class="col s8 ">
-                    <div class="row"></div>
-                    <div class="row">
-                        <video class="responsive-video" controls>
-                            <source src="https://s3-us-west-2.amazonaws.com/addax/all/59c1f773-a27b-4cdc-b3a7-85f1a6fb1b75/video.mp4 " type="video/mp4 ">
-                        </video>
-                    </div>
-                    <div class="row">
-                        <div class="col s8">
-                            <h3>Video Name</h3>
-                            <h5>Company Description goes here</h5>
-                        </div>
-                        <div class="col s4">
-                            <div class="row"></div>
-                            <div class="row"></div>
-                            <h6 class="right-align">500 Views</h6>
-                            <h6 class="right-align">Rated 99/100</h6>
-                        </div>
-
-                    </div>
+    </nav>
+    <div class="row">
+        <div class="row">
+            <div class="col s9 ">
+                <div class="row"></div>
+                <div class="row">
+                    <video class="responsive-video" id="suckMyDick" controls>
+    
+                    </video>
                 </div>
-                <!--<div class="col s1" style="background:#F1F1F1; height:100vh;"></div>-->
-                <div class="col s4" id="playlist">
-                    <div class="row">
-
+                <div class="row card">
+                    <div class="col s8">
+                        <h5>Video Name</h5>
+                        <h6>Company Description goes here</h6>
                     </div>
-                    <div class="row">
-                        <form class="col s12">
-                            <div class="row">
-                                <div class="switch"><label>By Views<input type="checkbox" checked><span class="lever"></span>By Rating</label></div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="row">
-                        <h3>Up Next...</h3>
-                    </div>
-                    <div class="row">
-
-                        <div class="row">
-                            <div class="col s7">
-                                <img class="responsive-img" src="cool_pic.jpg">
-                            </div>
-                            <div class="col s5" id="videoDescription">
-                                <h6>Suck My Dick</h6>
-                                <h6 style="color:#A3B3BF">356 Views</h6>
-                                <h6 style="color:#A3B3BF">Score: 70/100</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s7">
-                                <img class="responsive-img" src="cool_pic.jpg">
-                            </div>
-                            <div class="col s5" id="videoDescription">
-                                <h6>Suck My Dick</h6>
-                                <h6 style="color:#A3B3BF">356 Views</h6>
-                                <h6 style="color:#A3B3BF">Score: 70/100</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s7">
-                                <img class="responsive-img" src="cool_pic.jpg">
-                            </div>
-                            <div class="col s5" id="videoDescription">
-                                <h6>Suck My Dick</h6>
-                                <h6 style="color:#A3B3BF">356 Views</h6>
-                                <h6 style="color:#A3B3BF">Score: 70/100</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s7">
-                                <img class="responsive-img" src="cool_pic.jpg">
-                            </div>
-                            <div class="col s5" id="videoDescription">
-                                <h6>Suck My Dick</h6>
-                                <h6 style="color:#A3B3BF">356 Views</h6>
-                                <h6 style="color:#A3B3BF">Score: 70/100</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s7">
-                                <img class="responsive-img" src="cool_pic.jpg">
-                            </div>
-                            <div class="col s5" id="videoDescription">
-                                <h6>Suck My Dick</h6>
-                                <h6 style="color:#A3B3BF">356 Views</h6>
-                                <h6 style="color:#A3B3BF">Score: 70/100</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s7">
-                                <img class="responsive-img" src="cool_pic.jpg">
-                            </div>
-                            <div class="col s5" id="videoDescription">
-                                <h6>Suck My Dick</h6>
-                                <h6 style="color:#A3B3BF">356 Views</h6>
-                                <h6 style="color:#A3B3BF">Score: 70/100</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s7">
-                                <img class="responsive-img" src="cool_pic.jpg">
-                            </div>
-                            <div class="col s5" id="videoDescription">
-                                <h6>Suck My Dick</h6>
-                                <h6 style="color:#A3B3BF">356 Views</h6>
-                                <h6 style="color:#A3B3BF">Score: 70/100</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s7">
-                                <img class="responsive-img" src="cool_pic.jpg">
-                            </div>
-                            <div class="col s5" id="videoDescription">
-                                <h6>Suck My Dick</h6>
-                                <h6 style="color:#A3B3BF">356 Views</h6>
-                                <h6 style="color:#A3B3BF">Score: 70/100</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s7">
-                                <img class="responsive-img" src="cool_pic.jpg">
-                            </div>
-                            <div class="col s5" id="videoDescription">
-                                <h6>Suck My Dick</h6>
-                                <h6 style="color:#A3B3BF">356 Views</h6>
-                                <h6 style="color:#A3B3BF">Score: 70/100</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s7">
-                                <img class="responsive-img" src="cool_pic.jpg">
-                            </div>
-                            <div class="col s5" id="videoDescription">
-                                <h6>Suck My Dick</h6>
-                                <h6 style="color:#A3B3BF">356 Views</h6>
-                                <h6 style="color:#A3B3BF">Score: 70/100</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s7">
-                                <img class="responsive-img" src="cool_pic.jpg">
-                            </div>
-                            <div class="col s5" id="videoDescription">
-                                <h6>Suck My Dick</h6>
-                                <h6 style="color:#A3B3BF">356 Views</h6>
-                                <h6 style="color:#A3B3BF">Score: 70/100</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s7">
-                                <img class="responsive-img" src="cool_pic.jpg">
-                            </div>
-                            <div class="col s5" id="videoDescription">
-                                <h6>Suck My Dick</h6>
-                                <h6 style="color:#A3B3BF">356 Views</h6>
-                                <h6 style="color:#A3B3BF">Score: 70/100</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s7">
-                                <img class="responsive-img" src="cool_pic.jpg">
-                            </div>
-                            <div class="col s5" id="videoDescription">
-                                <h6>Suck My Dick</h6>
-                                <h6 style="color:#A3B3BF">356 Views</h6>
-                                <h6 style="color:#A3B3BF">Score: 70/100</h6>
-                            </div>
-                        </div>
-
+                    <div class="col s4">
+                        <div class="row"></div>
+                        <div class="row"></div>
+                        <h6 class="right-align">500 Views</h6>
+                        <h6 class="right-align">Rated 99/100</h6>
                     </div>
 
                 </div>
             </div>
+            <div class="col s3 card" id="playlist">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="switch"><label>By Views<input type="checkbox" checked><span class="lever"></span>By Rating</label></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                </div>
+
+            </div>
         </div>
-        <div class="col s2 " style="background:#F1F1F1; height:100vh; "></div>
     </div>
 </body>
 
