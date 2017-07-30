@@ -46,7 +46,7 @@
         $('#vidName').html(server_data[0].title)
         $('#companyDescription').html(server_data[0].uploader)
         $('#viewCount').html(Math.round(server_data[0].views) + " views")
-        $('#rating').html("Rating:" + Math.round(100 * server_data[0].impact_score) / 100 + "/10");
+        $('#rating').html("Rating:" + Math.round(10 * server_data[0].impact_score) + "/10");
     })
 
 
@@ -83,7 +83,7 @@
             $(viewCount).html(Math.round(data[i].views) + " views")
             var score = document.createElement('h6')
             score.setAttribute("id", "descriptionStyles")
-            $(score).html(Math.round(100 * data[i].impact_score) / 100 + "/10")
+            $(score).html(Math.round(10 * data[i].impact_score) + "/10")
 
             descriptionDiv.appendChild(titleText)
             descriptionDiv.appendChild(viewCount)
@@ -92,7 +92,7 @@
             rowDiv.appendChild(descriptionDiv)
             console.log(data)
             rowDiv.setAttribute('onClick', 'playVid(\"' + data[i].link.toString() + '\",\"' + data[i].title +
-                '\",\"' + data[i].uploader + '\",' + data[0].views + ',' + Math.round(100 * data[i].impact_score) / 100 +
+                '\",\"' + data[i].uploader + '\",' + data[0].views + ',' + Math.round(10 * data[i].impact_score) +
                 ')')
             rowDiv.setAttribute('id', 'thumbnail')
             playlist.appendChild(rowDiv)
@@ -109,7 +109,7 @@
         $('#vidName').html(title)
         $('#companyDescription').html(uploader)
         $('#viewCount').html(Math.round(views) + " views")
-        $('#rating').html("Rating:" + Math.round(100 * impact_score) / 100 + "/10");
+        $('#rating').html("Rating:" + Math.round(impact_score) + "/10");
         elem.play()
 
     }
@@ -240,7 +240,7 @@
         $('#vidName').html(server_data[0].title)
         $('#companyDescription').html(server_data[0].uploader)
         $('#viewCount').html(Math.round(server_data[0].views) + " views")
-        $('#rating').html("Rating:" + Math.round(100 * server_data[0].impact_score) / 100 + "/10");
+        $('#rating').html("Rating:" + Math.round(10 * server_data[0].impact_score) + "/10");
 
         elem.play()
         console.log("updated");
