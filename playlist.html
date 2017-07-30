@@ -6,7 +6,9 @@
     <title>Addax</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.3/lang/ca.min.js"></script>
 </head>
 
 <style>
@@ -40,6 +42,13 @@
         }
     }
 </style>
+<script>
+    $('.button-collapse').sideNav('show');
+    // Hide sideNav
+    $('.button-collapse').sideNav('hide');
+    // Destroy sideNav
+    $('.button-collapse').sideNav('destroy');
+</script>
 
 
 <body>
@@ -50,15 +59,33 @@
                 <li><a href="#!">Our Favorites</a></li>
                 <li><a href="#!">Trending</a></li>
             </ul>
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
         </div>
+
         <div class="col s1" style="background:#F1F1F1; height:100vh;"></div>
         <div class="col s9" style="height:100vh;">
             <div class="row">
                 <div class="col s8 ">
                     <div class="row"></div>
-                    <video class="responsive-video" controls>
-                        <source src="https://s3-us-west-2.amazonaws.com/addax/all/59c1f773-a27b-4cdc-b3a7-85f1a6fb1b75/video.mp4 " type="video/mp4 ">
-                    </video>
+                    <div class="row">
+                        <video class="responsive-video" controls>
+                            <source src="https://s3-us-west-2.amazonaws.com/addax/all/59c1f773-a27b-4cdc-b3a7-85f1a6fb1b75/video.mp4 " type="video/mp4 ">
+                        </video>
+                    </div>
+                    <div class="row">
+                        <div class="col s8">
+                            <h3>Video Name</h3>
+                            <h5>Company Description goes here</h5>
+                        </div>
+                        <div class="col s4">
+                            <div class="row"></div>
+                            <div class="row"></div>
+                            <h6 class="right-align">500 Views</h6>
+                            <h6 class="right-align">Rated 99/100</h6>
+                        </div>
+
+                    </div>
                 </div>
                 <!--<div class="col s1" style="background:#F1F1F1; height:100vh;"></div>-->
                 <div class="col s4" id="playlist">
