@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
 </head>
 
 <style>
@@ -47,6 +48,19 @@
     .btn:hover {
         background: #EE6E73
     }
+    
+    .centerDiv {
+        width: 800px;
+        border-radius: 5px;
+        background: #ccc;
+        padding: 10px;
+        height: 50px;
+        position: absolute;
+        margin-top: -25px;
+        margin-left: -400px;
+        top: 50%;
+        left: 50%;
+    }
 </style>
 <script>
     function sendData() {
@@ -66,8 +80,9 @@
     }
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
 
-<body>
+<!--<body>
     <nav>
         <div class="nav-wrapper">
             <ul class="left hide-on-med-and-down"></ul>
@@ -123,6 +138,56 @@
             </div>
         </div>
     </div>
+
+</body>-->
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <ul class="left hide-on-med-and-down"></ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col s4 offset-s4">
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="container ">
+                <div class="row">
+                    <canvas id="myChart" width="400" height="400"></canvas>
+                    <script>
+                        var ctx = document.getElementById("myChart");
+                        var myChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                datasets: [{
+                                    data: [9, 1],
+                                    backgroundColor: [
+                                        'rgba(144, 223, 20, 255)',
+                                        'RGB(219, 219, 217)',
+                                    ],
+                                    borderColor: [
+                                        'rgba(144, 223, 20, 255)',
+                                        'RGB(219, 219, 217)',
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: Chart.defaults.doughnut
+                        });
+                    </script>
+                </div>
+                <div class="row">
+                    <h5 class="center-align">Your Score is a 9.0</h5>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
 </body>
 
