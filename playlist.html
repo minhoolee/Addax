@@ -76,7 +76,7 @@
             $(viewCount).html(data[i].views + "views")
             var score = document.createElement('h6')
             score.setAttribute("id", "descriptionStyles")
-            $(score).html(data[i].score + "/10")
+            $(score).html(data[i].impact_score + "/10")
 
             descriptionDiv.appendChild(titleText)
             descriptionDiv.appendChild(viewCount)
@@ -124,7 +124,7 @@
         var result = [];
 
         while (left.length && right.length) {
-            if (left[0].score >= right[0].score) {
+            if (left[0].impact_score >= right[0].impact_score) {
                 result.push(left.shift());
             } else {
                 result.push(right.shift());
