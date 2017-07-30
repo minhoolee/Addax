@@ -67,22 +67,29 @@
         var companyName = document.getElementById('input_text nameField')
         var adName = document.getElementById('input_text nameField2')
         var description = document.getElementById('textarea1 description')
-        var file = document.getElementById('fileinput')
+        var video = document.getElementById('fileinput')
 
         var obj = {
             "companyName": companyName,
             "adName": adName,
             "description": description,
-            "file": file
+            "video": file
         }
 
-        console.log(obj)
+        $.post("obj", function(data) {
+            console.log(data)
+        });
+
+        $.post("http://AddaxServer-env.ubepzwztwv.us-west-2.elasticbeanstalk.com/uploadFile", function(obj, status) {
+            console.log(status)
+        });
+
     }
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
 
-<!--<body>
+<body>
     <nav>
         <div class="nav-wrapper">
             <ul class="left hide-on-med-and-down"></ul>
@@ -131,62 +138,12 @@
                     </div>
                     <div class="center-align row">
                         <br><br>
-                        <button class="btn" type="submit" name="action" onClick="sendData()">Submit
-                        </button>
+                        <a href='./viewScore.html' onClick="sendData()" class="btn">Submit</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
-</body>-->
-
-<body>
-    <nav>
-        <div class="nav-wrapper">
-            <ul class="left hide-on-med-and-down"></ul>
-        </div>
-    </nav>
-    <div class="row">
-        <div class="col s4 offset-s4">
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="container ">
-                <div class="row">
-                    <canvas id="myChart" width="400" height="400"></canvas>
-                    <script>
-                        var ctx = document.getElementById("myChart");
-                        var myChart = new Chart(ctx, {
-                            type: 'doughnut',
-                            data: {
-                                datasets: [{
-                                    data: [9, 1],
-                                    backgroundColor: [
-                                        'rgba(144, 223, 20, 255)',
-                                        'RGB(219, 219, 217)',
-                                    ],
-                                    borderColor: [
-                                        'rgba(144, 223, 20, 255)',
-                                        'RGB(219, 219, 217)',
-                                    ],
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: Chart.defaults.doughnut
-                        });
-                    </script>
-                </div>
-                <div class="row">
-                    <h5 class="center-align">Your Score is a 9.0</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
 </body>
 
