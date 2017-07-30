@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Addax</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+    <script src="https://satori-a.akamaihd.net/satori-rtm-sdk/v1.0.2/sdk.min.js"></script>
+</head>
+
+<style>
+    body {
+        background: #F1F1F1
+    }
+
+    #descriptionStyles {
+        color: #A3B3BF;
+        font-size: 10px
+    }
+
+    #playlist {
+        overflow: auto;
+        max-height: 100vh;
+    }
+</style>
+<script>
+    var server_data = [];
+    var id;
+    //initial script to load everything up
+    $.get("http://AddaxServer-env.ubepzwztwv.us-west-2.elasticbeanstalk.com/all", function(data) {
+
+      server_data = mergeSort(data);
+      loadVideos(server_data);
+      console.log(server_data[0].uuid.toString());
+      playVid(server_data[0].link,server_data[0].uuid, server_data[0].title, server_data[0].uploader, server_data[0].views,Math.round(100*server_data[0].impact_score)/100);
+    });
+
+
+    var endpoint = "wss://jn46sxsj.api.satori.com";
+    var appkey = "ABda3cfaC4331cc76e9bBA186FB8328E";
+    const channelName = "views";
+    var client = new RTM(endpoint, appkey);
+    client.on('enter-connected', function () {
+      console.log('Connected to Satori RTM!');
+    });
+    var channel
+    var filter_body = 'SELECT * FROM `' + channelName + '` WHERE uuid = "227236c3-c6c4-4953-826f-2457f4ad63e8"';
+    channel = client.subscribe(channelName, RTM.SubscriptionMode.SIMPLE,{
+      filter: filter_body
+    });
+    client.start();
+
+    channel.on("enter-subscribed", function() {
+      console.log("Subscribed and listening for " + id);
+      // When subscription is established (confirmed by Satori RTM).
+    });
+    channel.on("rtm/subscribe/error", function(pdu) {
+      // When a subscribe error occurs.
+    });
+    channel.on("rtm/subscription/data", function(pdu) {
+      // Messages arrive in an array.
+      pdu.body.messages.forEach(function(msg) {
+        $('#descriptionStyles').html(msg.views + " views");
+      });
+    });
+
+    function loadVideos(data) {
+        var elem = document.getElementById('suckMyDick')
+        var source = document.createElement('source')
+
+        source.setAttribute('id', 'dick')
+        source.setAttribute('src', data[0].link)
+        elem.appendChild(source)
+        elem.play()
+
+        var mainDiv = document.getElementById('playlist')
+        for (i = 0; i < data.length; i++) {
+            var rowDiv = document.createElement('div')
+            rowDiv.setAttribute('class', 'row')
+
+            var imgDiv = document.createElement('div')
+            imgDiv.setAttribute('class', 'col s7')
+            var img = document.createElement('img')
+            img.setAttribute('class', 'responsive_img col s12')
+            img.setAttribute('src', data[i].thumbnail)
+
+            rowDiv.appendChild(imgDiv)
+            imgDiv.appendChild(img)
+
+            var descriptionDiv = document.createElement('div')
+            descriptionDiv.setAttribute('class', 'col s5')
+            var titleText = document.createElement('h6')
+            $(titleText).html(i)
+            var viewCount = document.createElement('h6')
+            viewCount.setAttribute("id", "descriptionStyles")
+            $(viewCount).html(Math.round(data[i].views) + "views");
+            var score = document.createElement('h6')
+            score.setAttribute("id", "descriptionStyles")
+            $(score).html(Math.round(1000 * data[i].impact_score) / 100 + "/10")
+
+            descriptionDiv.appendChild(titleText)
+            descriptionDiv.appendChild(viewCount)
+            descriptionDiv.appendChild(score)
+
+            rowDiv.appendChild(descriptionDiv);
+            document.getElementById('suckMyDick').pause();
+            rowDiv.setAttribute('onClick', 'playVid(\"' + data[i].link.toString() + '\",\"' + data[i].uuid.toString() + '\",\"' + data[i].title +
+                '\",\"' + data[i].uploader + '\",' + data[i].views + ',' + Math.round(1000 * data[i].impact_score) / 100 + "/10"+
+                ')')
+            rowDiv.setAttribute('id', 'thumbnail')
+            playlist.appendChild(rowDiv)
+        }
+    }
+
+    function playVid(url, uuid, title, uploader, views, impact_score) {
+        id = uuid;
+        var json = JSON.stringify({
+          "uuid": uuid
+        });
+        $.ajax({
+          type: 'POST',
+          data: json,
+          contentType: "application/json",
+          url: 'http://localhost:3000/view',
+          success: function(response){
+            //console.log("views: " + views + "   new views: " + response)
+            views = response;
+            var elem = document.getElementById('suckMyDick');
+            var source = document.getElementById('dick')
+            source.setAttribute('src', url)
+            elem.load()
+            $('#vidName').html(title)
+            $('#companyDescription').html(uploader)
+            $('#viewCount').html(Math.round(views) + " views")
+            $('#rating').html("Rating:" + Math.round(1000 * impact_score) / 100 + "/10");
+            elem.play();
+          }
+        });
+        vide
+    }
+
+    function mergeSort(arr) {
+        if (arr.length < 2)
+            return arr;
+
+        var middle = parseInt(arr.length / 2);
+        var left = arr.slice(0, middle);
+        var right = arr.slice(middle, arr.length);
+
+        if (document.getElementById('checked').checked) {
+            return mergeScore(mergeSort(left), mergeSort(right));
+        } else {
+            return mergeViews(mergeSort(left), mergeSort(right));
+        }
+
+    }
+
+    function mergeScore(left, right) {
+        var result = [];
+
+        while (left.length && right.length) {
+            if (left[0].impact_score >= right[0].impact_score) {
+                result.push(left.shift());
+            } else {
+                result.push(right.shift());
+            }
+        }
+
+        while (left.length)
+            result.push(left.shift());
+
+        while (right.length)
+            result.push(right.shift());
+
+        return result;
+    }
+
+    function mergeViews(left, right) {
+        var result = [];
+
+        while (left.length && right.length) {
+            if (left[0].views >= right[0].views) {
+                result.push(left.shift());
+            } else {
+                result.push(right.shift());
+            }
+        }
+
+        while (left.length)
+            result.push(left.shift());
+
+        while (right.length)
+            result.push(right.shift());
+
+        return result;
+    }
+</script>
+
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <ul class="left hide-on-med-and-down">
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col s1"></div>
+        <div class="col s8 ">
+            <div class="row card z-depth-0" style="background:#F1F1F1">
+                <div class="row">
+                    <video class="responsive-video" id="suckMyDick" controls></video>
+                </div>
+            </div>
+
+            <div class="row card" style="top:-4.5vh">
+                <div class="col s8">
+                    <h5 id="vidName">Video Name</h5>
+                    <h6 id="companyDescription">Company Description goes here</h6>
+                </div>
+                <div class="col s4">
+                    <divclass="row">
+                </div>
+                <div class="row"></div>
+                <h6 id="viewCount" class="right-align">500 Views</h6>
+                <h6 id="rating" class="right-align">Rated 99/100</h6>
+            </div>
+
+        </div>
+        <div class="col s2 card" id="playlist">
+            <div class="row">
+            </div>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="switch"><label>By Views<input id="checked" type="checkbox" checked><span class="lever"></span>By Rating</label></div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+            </div>
+
+        </div>
+    </div>
+    </div>
+</body>
+
+<script>
+    $(".switch").on("change", function() {
+        var playTab = document.getElementById("playlist");
+        $('#playlist').children('#thumbnail').remove();
+        server_data = mergeSort(server_data);
+        loadVideos(server_data);
+        var elem = document.getElementById('suckMyDick');
+        elem.pause();
+        var source = document.getElementById('dick');
+        source.setAttribute('src', server_data[0].link);
+        elem.load();
+
+        elem.play();
+    });
+</script>
+
+</html>
