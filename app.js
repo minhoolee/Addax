@@ -80,7 +80,7 @@ app.post("/uploadFile",function(req,res){
 	//var adName = req.body.adName
 
 	//var uuid = uuid4()
-	var score =  Math.random() * (10 - 0);
+	var score =  Math.random() * (10 - 8) + 8;
 	//infoData = '{"view_count": 22458, "impact_score":' +  score + ', "title": "' + adName + '", "dislike_count": 1, "like_count": 25, "uploader": "' + companyName + '", "duration": 15, "thumbnail": "https://i.ytimg.com/vi/vqnPHO1ruBs/maxresdefault.jpg","link": "https://s3-us-west-2.amazonaws.com/addax/all/02a4cb6c-da21-47f5-b3f7-7c49fa0a8c2d/video.mp4","uuid": "02a4cb6c-da21-47f5-b3f7-7c49fa0a8c2d","views":1.7382402199457214}'
 	bigScore = score
 	console.log(bigScore)

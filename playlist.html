@@ -16,6 +16,11 @@
         height: 100%;
         overflow: hidden
     }*/
+    html, body:not(#playlist) {
+        margin: 0; 
+        height: 100%; 
+        overflow: hidden
+    }
     
     body {
         background: #F1F1F1
@@ -28,7 +33,7 @@
     
     #playlist {
         overflow: auto;
-        max-height: 100vh;
+        max-height: 71vh;
     }
 </style>
 <script>
@@ -72,10 +77,10 @@
             var descriptionDiv = document.createElement('div')
             descriptionDiv.setAttribute('class', 'col s5')
             var titleText = document.createElement('h6')
-            $(titleText).html(i)
+            $(titleText).html(data[i].title)
             var viewCount = document.createElement('h6')
             viewCount.setAttribute("id", "descriptionStyles")
-            $(viewCount).html(Math.round(data[i].views) + "views")
+            $(viewCount).html(Math.round(data[i].views) + " views")
             var score = document.createElement('h6')
             score.setAttribute("id", "descriptionStyles")
             $(score).html(Math.round(100 * data[i].impact_score) / 100 + "/10")
@@ -173,22 +178,25 @@
 
 
 <body>
-    <nav>
-        <div class="nav-wrapper">
-            <ul class="left hide-on-med-and-down">
-            </ul>
-        </div>
-    </nav>
+  <nav style="background:#90caf9">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Addax</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="playlist.html">Playlist</a></li>
+        <li><a href="upload.html">Upload</a></li>
+      </ul>
+    </div>
+  </nav>
     <div class="row">
         <div class="col s1"></div>
-        <div class="col s8 ">
+        <div class="col s7 ">
             <div class="row card z-depth-0" style="background:#F1F1F1">
                 <div class="row">
                     <video class="responsive-video" id="suckMyDick" controls></video>
                 </div>
             </div>
 
-            <div class="row card" style="top:-4.5vh">
+            <div class="row card" style="top:-3.5vh">
                 <div class="col s8">
                     <h5 id="vidName">Video Name</h5>
                     <h6 id="companyDescription">Company Description goes here</h6>
@@ -196,13 +204,13 @@
                 <div class="col s4">
                     <divclass="row">
                 </div>
-                <div class="row"></div>
+                <br><br>
                 <h6 id="viewCount" class="right-align">500 Views</h6>
                 <h6 id="rating" class="right-align">Rated 99/100</h6>
             </div>
 
         </div>
-        <div class="col s2 card" id="playlist">
+        <div class="col s3 card" id="playlist">
             <div class="row">
             </div>
             <div class="row">
@@ -212,9 +220,6 @@
                     </div>
                 </form>
             </div>
-            <div class="row">
-            </div>
-
         </div>
     </div>
     </div>
@@ -231,6 +236,11 @@
         var source = document.getElementById('dick')
         source.setAttribute('src', server_data[0].link)
         elem.load()
+
+        $('#vidName').html(server_data[0].title)
+        $('#companyDescription').html(server_data[0].uploader)
+        $('#viewCount').html(Math.round(server_data[0].views) + " views")
+        $('#rating').html("Rating:" + Math.round(100 * server_data[0].impact_score) / 100 + "/10");
 
         elem.play()
         console.log("updated");

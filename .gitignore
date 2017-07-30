@@ -60,3 +60,4 @@ typings/
 # Project dependent test files
 *.json
 *.mp4
+*.zip

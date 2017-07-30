@@ -70,42 +70,50 @@
         var video = document.getElementById('fileinput')
 
         var obj = {
-            "companyName": companyName,
-            "adName": adName,
-            "description": description,
-            "video": file
+            "companyName": companyName.value,
+            "adName": adName.value,
+            "description": description.value,
+            "video": video.value.replace("C:\\fakepath\\","")
         }
+        console.log(obj)
 
-        $.post("obj", function(data) {
-            console.log(data)
-        });
+       
 
         $.ajax({
             type:'POST',
             data: JSON.stringify(obj),
             contentType: "application/json",
             url: "http://AddaxServer-env.ubepzwztwv.us-west-2.elasticbeanstalk.com/uploadFile",success:function(data){
-                sleep(3000)
-                console.log(data);
+
+                console.log("success")
+                dsleep(3000)
+
+
             }
         });
+
             
-        function sleep(delay){
-            var start = new Date().getTime();
-            while (new Date().getTime() < start + delay);
-        }
+
     }
 
+    function dsleep(delay) {
+        var start = new Date().getTime();
+        while (new Date().getTime() < start + delay);
+    }
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
 
 <body>
-    <nav>
-        <div class="nav-wrapper">
-            <ul class="left hide-on-med-and-down"></ul>
-        </div>
-    </nav>
+  <nav style="background:#90caf9">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Addax</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="playlist.html">Playlist</a></li>
+        <li><a href="upload.html">Upload</a></li>
+      </ul>
+    </div>
+  </nav>
     <div class="container">
         <div class="row"></div>
         <div class="row">
@@ -149,7 +157,7 @@
                     </div>
                     <div class="center-align row">
                         <br><br>
-                        <a href='./viewScore.html' onClick="sendData()" class="btn">Submit</a>
+                        <a href = "./viewScore.html" onClick="sendData()" class="btn">Submit</a>
                     </div>
                 </form>
             </div>
