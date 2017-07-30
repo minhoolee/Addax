@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Addax</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+</head>
+
+<style>
+    body:not(#playlist) {
+        margin: 0;
+        height: 100%;
+        overflow: hidden
+    }
+    
+    #playlist {
+        overflow: auto;
+        max-height: 100vh;
+    }
+    
+    .btn-flat:hover {
+        background-color: #DEDEDE;
+        width: 100%
+    }
+    
+    header,
+    main,
+    footer {
+        padding-left: 300px;
+    }
+    
+    @media only screen and (max-width: 992px) {
+        header,
+        main,
+        footer {
+            padding-left: 0;
+        }
+    }
+    
+    .btn {
+        background: #EE6E73
+    }
+    
+    .btn:hover {
+        background: #EE6E73
+    }
+    
+    .centerDiv {
+        width: 800px;
+        border-radius: 5px;
+        background: #ccc;
+        padding: 10px;
+        height: 50px;
+        position: absolute;
+        margin-top: -25px;
+        margin-left: -400px;
+        top: 50%;
+        left: 50%;
+    }
+</style>
+<script>
+    function sendData() {
+        var companyName = document.getElementById('input_text nameField')
+        var adName = document.getElementById('input_text nameField2')
+        var description = document.getElementById('textarea1 description')
+        var file = document.getElementById('fileinput')
+
+        var obj = {
+            "companyName": companyName,
+            "adName": adName,
+            "description": description,
+            "file": file
+        }
+
+        console.log(obj)
+    }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+
+
+
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="playlist.html">Playlist</a></li>
+        <li><a href="upload.html">Upload</a></li>
+      </ul>
+    </div>
+  </nav>
+    <div class="row">
+        <div class="col s4 offset-s4">
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="container ">
+                <div class="row">
+                    <canvas id="myChart" width="400" height="400"></canvas>
+                    <script>
+                        var dat
+                        $.get("http://localhost:3000/score", function(data) {
+                            dat = data.score
+                             console.log(dat)
+                                                     var ctx = document.getElementById("myChart");
+                        var myChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                datasets: [{
+                                    data: [dat, 10 - dat],
+                                    backgroundColor: [
+                                        'rgba(144, 223, 20, 255)',
+                                        'RGB(219, 219, 217)',
+                                    ],
+                                    borderColor: [
+                                        'rgba(144, 223, 20, 255)',
+                                        'RGB(219, 219, 217)',
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: Chart.defaults.doughnut
+                        });
+                        $('#scoreReport').html('Your Score is '+dat.toFixed(2))
+
+                        })
+
+
+
+                    </script>
+                </div>
+                <div class="row">
+                    <h5 class="center-align" id="scoreReport">Your Score is a ...</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
