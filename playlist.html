@@ -49,7 +49,7 @@
         var source = document.createElement('source')
 
         source.setAttribute('id', 'dick')
-        source.setAttribute('src', data[0].url)
+        source.setAttribute('src', data[0].link)
         elem.appendChild(source)
         elem.play()
 
@@ -84,7 +84,7 @@
 
             rowDiv.appendChild(descriptionDiv)
             console.log(data)
-            rowDiv.setAttribute('onClick', 'playVid(\"' + data[i].url.toString() + '\")')
+            rowDiv.setAttribute('onClick', 'playVid(\"' + data[i].link.toString() + '\")')
             rowDiv.setAttribute('id', 'thumbnail')
             playlist.appendChild(rowDiv)
         }
@@ -229,7 +229,7 @@
         var elem = document.getElementById('suckMyDick')
         elem.pause()
         var source = document.getElementById('dick')
-        source.setAttribute('src', server_data[0].url)
+        source.setAttribute('src', server_data[0].link)
         elem.load()
 
         elem.play()
