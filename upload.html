@@ -39,10 +39,90 @@
             padding-left: 0;
         }
     }
+    
+    .btn {
+        background: #EE6E73
+    }
+    
+    .btn:hover {
+        background: #EE6E73
+    }
 </style>
+<script>
+    function sendData() {
+        var companyName = document.getElementById('input_text nameField')
+        var adName = document.getElementById('input_text nameField2')
+        var description = document.getElementById('textarea1 description')
+        var file = document.getElementById('fileinput')
+
+        var obj = {
+            "companyName": companyName,
+            "adName": adName,
+            "description": description,
+            "file": file
+        }
+
+        console.log(obj)
+    }
+</script>
 
 
 <body>
+    <nav>
+        <div class="nav-wrapper">
+            <ul class="left hide-on-med-and-down"></ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row"></div>
+        <div class="row">
+            <div class="col s6 offset-s3">
+                <h3 class="center-align">
+                    Welcome to Addax
+                </h3>
+                <h6 class="center-align" style="color: #A3B3BF; font-weight:300">
+                    We want to display ads that have a good potential to both impact and entertain its viewers. We encourage you guys to submit!
+                </h6>
+            </div>
+        </div>
+        <div class="row"></div>
+        <div class="row">
+            <div class="col s6 offset-s3">
+                <form action="#">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="input_text nameField" type="text" data-length="10">
+                            <label for="input_text">Company Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="input_text nameField2" type="text" data-length="10">
+                            <label for="input_text">Commercial Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="textarea1 description" class="materialize-textarea" data-length="25"></textarea>
+                            <label for="textarea1">Commercial Description</label>
+                        </div>
+                    </div>
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>File</span>
+                            <input type="file" id="fileinput">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                    <div class="center-align row">
+                        <br><br>
+                        <button class="btn" type="submit" name="action" onClick="sendData()">Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </body>
 
