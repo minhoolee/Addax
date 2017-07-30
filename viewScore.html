@@ -85,11 +85,14 @@
 
 
 <body>
-    <nav>
-        <div class="nav-wrapper">
-            <ul class="left hide-on-med-and-down"></ul>
-        </div>
-    </nav>
+  <nav>
+    <div class="nav-wrapper">
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="playlist.html">Playlist</a></li>
+        <li><a href="upload.html">Upload</a></li>
+      </ul>
+    </div>
+  </nav>
     <div class="row">
         <div class="col s4 offset-s4">
             <div class="row"></div>
@@ -104,15 +107,14 @@
                     <script>
                         var dat
                         $.get("http://AddaxServer-env.ubepzwztwv.us-west-2.elasticbeanstalk.com/score", function(data) {
-                            dat = data
-                        })
-                        var d2 = Math.round(100 * dat) / 100
-                        var ctx = document.getElementById("myChart");
+                            dat = data.score
+                             console.log(dat)
+                                                     var ctx = document.getElementById("myChart");
                         var myChart = new Chart(ctx, {
                             type: 'doughnut',
                             data: {
                                 datasets: [{
-                                    data: [d2, 10 - d2],
+                                    data: [dat, 10 - dat],
                                     backgroundColor: [
                                         'rgba(144, 223, 20, 255)',
                                         'RGB(219, 219, 217)',
@@ -126,7 +128,12 @@
                             },
                             options: Chart.defaults.doughnut
                         });
-                        $('#scoreReport').html('Your Score is a ' + d2)
+                        $('#scoreReport').html('Your Score is '+dat.toFixed(2))
+
+                        })
+
+
+
                     </script>
                 </div>
                 <div class="row">

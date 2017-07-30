@@ -80,11 +80,23 @@
             console.log(data)
         });
 
-        $.post("http://AddaxServer-env.ubepzwztwv.us-west-2.elasticbeanstalk.com/uploadFile", function(obj, status) {
-            console.log(status)
+        $.ajax({
+            type:'POST',
+            data: JSON.stringify(obj),
+            contentType: "application/json",
+            url: "http://AddaxServer-env.ubepzwztwv.us-west-2.elasticbeanstalk.com/uploadFile",success:function(data){
+                sleep(3000)
+                console.log(data);
+            }
         });
-
+            
+        function sleep(delay){
+            var start = new Date().getTime();
+            while (new Date().getTime() < start + delay);
+        }
     }
+
+    
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
