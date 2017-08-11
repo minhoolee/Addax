@@ -1,12 +1,19 @@
 AngelHack 2017
 ==============================
 
-Submission for Angel Hack 2017. Our product aims to disrupt the ad industry
-because we believe that advertisements are boring and growingly ineffective.
-We want to change this by incentivizing companies to make higher quality ads,
-like those seen on the SuperBowl. In order to do this, we artificially create
-and environment where higher quality advertisements translate into higher
-returns on investment.
+Submission for Angel Hack 2017: Silicon Valley. 
+
+Team (in no particular order): [Min Hoo Lee](https://github.com/minhoolee), 
+[Aditesh Kumar](https://github.com/aramuk),
+[Adithya Mohan](https://github.com/adithyaMohan200),
+[Ananth Chillarige](https://github.com/achillarige).
+
+Our product aims to disrupt the ad industry because we believe that 
+advertisements are boring and growingly ineffective. We want to change this 
+by incentivizing companies to make higher quality ads, like those seen on 
+the SuperBowl. In order to do this, we artificially create an environment 
+where higher quality advertisements translate into higher returns on 
+investment.
 
 In short, our product uses machine learning to score video advertisements
 that companies provide, on a scale of 1-10 based off of how well the
